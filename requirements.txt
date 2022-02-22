@@ -1,0 +1,7 @@
+django
+django-crispy-forms
+
+requests
+
+pylint
+pylint-django
