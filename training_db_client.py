@@ -3,9 +3,12 @@ import requests
 
 MODEL_SERVER_URL = "http://traindb.danbots.com/"
 API = "api/save"
-URL = MODEL_SERVER_URL + API
 
-_DEBUG = False
+_DEBUG = True
+
+if _DEBUG:
+    MODEL_SERVER_URL = "http://127.0.0.1:8000/"
+URL = MODEL_SERVER_URL + API
 
 def save_training_result(paramlist):
     resp = requests.post(URL, json=paramlist )
@@ -21,7 +24,7 @@ def save_training_result(paramlist):
 # eksempel
 
 if __name__ == "__main__":
-    myparamlist = {"model1": "mymodel1", "model2": "mymodel2"}
+    myparamlist = {"description": "mymodel1", "model2": "mymodel2"}
     result = save_training_result(myparamlist)
     if not result:
         print("saving training data went wrong")
