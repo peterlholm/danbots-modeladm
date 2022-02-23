@@ -19,7 +19,7 @@ def trainmodel(request):
         print ("form is invalid")
     else:
         myid = request.GET.get('id')
-        if id is not None:
+        if myid is not None:
             print("ID:", myid)
             train_elem = TrainingModel.objects.get(pk=myid)
             print (train_elem)
