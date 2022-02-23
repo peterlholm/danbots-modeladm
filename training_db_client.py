@@ -7,7 +7,7 @@ API = "api/save"
 _DEBUG = True
 
 if _DEBUG:
-    MODEL_SERVER_URL = "http://127.0.0.1:8000/"
+    MODEL_SERVER_URL = "http://localhost:8000/"
 URL = MODEL_SERVER_URL + API
 
 def save_training_result(paramlist):

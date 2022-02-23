@@ -1,5 +1,6 @@
 "Views for training"
 from django.shortcuts import render
+#from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from .models import TrainingModel
 from .forms import TrainingModelForm
@@ -8,6 +9,7 @@ def index(request):
     return render(request, 'index.html')
     #return HttpResponse("Hello, world. You're at the polls index.")
 
+#@login_required
 def trainmodel(request):
     if request.method == 'POST':
         print("vi poster")
@@ -32,6 +34,7 @@ def trainmodel(request):
 
     return render(request, 'model.html', mycontext)
 
+#@login_required
 def list_models(request):
     models = list(TrainingModel.objects.all().values())
     mycontext = {"modellist": models}

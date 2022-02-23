@@ -3,7 +3,6 @@ import json
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
-from isort import file
 from models.models import TrainingModel
 # Create your views here.
 
@@ -12,10 +11,10 @@ def save_training(request):
     print("API save model")
     if request.method in ['POST']:
         received_json_data = json.loads(request.body)
-        print(received_json_data)
+        print("received", received_json_data)
 
         field_list = TrainingModel._meta.fields
-        print (field_list)
+        #print (field_list)
         print (field_list[1].name)
         #     description = models.CharField(max_length=200)
         # date = models.DateTimeField('date created')
@@ -40,13 +39,15 @@ def save_training(request):
         # normalization = models.CharField(max_length=20)
         # learning_rate =
         #new_train.
-        new_train = TrainingModel()
+        new_train = TrainingModel(description="dumm")
         for field in field_list:
             print (field.name)
             if field.name in received_json_data:
-                print("update field")
+                print("update field", field.name, received_json_data[field.name] )
                 new_train.field = received_json_data[field.name]
-
+                print (new_train)
+        new_train.save()
+        
         return HttpResponse('OK')
 
     models = list(TrainingModel.objects.all().values())

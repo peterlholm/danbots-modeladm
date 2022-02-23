@@ -29,7 +29,16 @@ environment:
 requirements:
 	. $(ENV_PATH)/bin/activate ; pip install -r requirements.txt
 
+db:
+	@echo "Prepare DB"
+	@chown www-data:danbots db.sqlite3
 
+django:
+	. $(ENV_PATH)/bin/activate; python manage.py collectstatic;	python manage.py migrate
+
+permissions:
+	chown www-data:danbots . db.sqlite3 static
+	
 install:	apache
 	@echo "Install TrainingDB website"
 
