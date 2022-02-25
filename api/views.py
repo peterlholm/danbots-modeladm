@@ -4,6 +4,7 @@ import json
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
+from django.utils import timezone
 from models.models import TrainingModel
 # Create your views here.
 
@@ -17,12 +18,9 @@ def save_training(request):
         print("received", received_json_data)
 
         field_list = TrainingModel._meta.fields
-        #print (field_list)
-        print (field_list[1].name)
-        # learning_rate =
-        #new_train.
-        new_train = TrainingModel(description="dumm")
-        new_train.date = str(datetime.now())
+
+        new_train = TrainingModel()
+        new_train.date = str(timezone.now())
         if 'description' in received_json_data:
             new_train.description = received_json_data['description']
         if 'hostname'in received_json_data:
