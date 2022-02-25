@@ -40,6 +40,17 @@ def save_training(request):
         # learning_rate =
         #new_train.
         new_train = TrainingModel(description="dumm")
+        if received_json_data['description']:
+            new_train.description = received_json_data['description']
+        if received_json_data['hostname']:
+            new_train.hostname = received_json_data['hostname']
+        if received_json_data['model_path']:
+            new_train.model_path = received_json_data['model_path']
+        if received_json_data['batch_size']:
+            new_train.batch_size = received_json_data['batch_size']
+        if received_json_data['description']:
+            new_train.description = received_json_data['description']
+            
         for field in field_list:
             print (field.name)
             if field.name in received_json_data:
