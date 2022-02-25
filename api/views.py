@@ -1,10 +1,13 @@
 "API functions"
+from datetime import datetime
 import json
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from models.models import TrainingModel
 # Create your views here.
+
+# pylint: disable=too-many-branches, too-many-statements
 
 @csrf_exempt
 def save_training(request):
@@ -16,49 +19,58 @@ def save_training(request):
         field_list = TrainingModel._meta.fields
         #print (field_list)
         print (field_list[1].name)
-        #     description = models.CharField(max_length=200)
-        # date = models.DateTimeField('date created')
-        # hostname = models.CharField(max_length=40)
-        # history_path = models.CharField(max_length=200)
-        # model_path = models.CharField(max_length=200)
-        # figures_dir = models.CharField(max_length=200)
-        # dict_text_output_path = models.CharField(max_length=200)
-        # checkpoint_path = models.CharField(max_length=200)
-        # test_indexes_list_path = models.CharField(max_length=200)
-        # test_indexes_list_path = models.CharField(max_length=200)
-        # imagecount = models.IntegerField()
-        # num_training_img = models.IntegerField()
-        # num_validation_img = models.IntegerField()
-        # epocs = models.IntegerField()
-        # batch_size = models.IntegerField()
-        # loss = models.CharField(max_length=20)
-        # metrics = models.CharField(max_length=20)
-        # optimizer = models.CharField(max_length=20)
-        # power = models.IntegerField()
-        # n_blocks = models.IntegerField()
-        # normalization = models.CharField(max_length=20)
         # learning_rate =
         #new_train.
         new_train = TrainingModel(description="dumm")
-        if received_json_data['description']:
+        new_train.date = str(datetime.now())
+        if 'description' in received_json_data:
             new_train.description = received_json_data['description']
-        if received_json_data['hostname']:
+        if 'hostname'in received_json_data:
             new_train.hostname = received_json_data['hostname']
-        if received_json_data['model_path']:
+        if 'history_path'in received_json_data:
+            new_train.history_path = received_json_data['history_path']
+        if 'model_path'in received_json_data:
             new_train.model_path = received_json_data['model_path']
-        if received_json_data['batch_size']:
+        if 'figures_dir'in received_json_data:
+            new_train.figures_dir = received_json_data['figures_dir']
+        if 'dict_text_output_path'in received_json_data:
+            new_train.dict_text_output_path = received_json_data['dict_text_output_path']
+        if 'checkpoint_path'in received_json_data:
+            new_train.checkpoint_path = received_json_data['checkpoint_path']
+        if 'test_indexes_list_path'in received_json_data:
+            new_train.test_indexes_list_path = received_json_data['test_indexes_list_path']
+        if 'imagecount'in received_json_data:
+            new_train.imagecount = received_json_data['imagecount']
+        if 'num_training_img'in received_json_data:
+            new_train.num_training_img = received_json_data['num_training_img']
+        if 'num_validation_img'in received_json_data:
+            new_train.num_validation_img = received_json_data['num_validation_img']
+        if 'epocs'in received_json_data:
+            new_train.epocs = received_json_data['epocs']
+        if 'batch_size'in received_json_data:
             new_train.batch_size = received_json_data['batch_size']
-        if received_json_data['description']:
-            new_train.description = received_json_data['description']
-            
-        for field in field_list:
-            print (field.name)
-            if field.name in received_json_data:
-                print("update field", field.name, received_json_data[field.name] )
-                new_train.field = received_json_data[field.name]
-                print (new_train)
+        if 'loss'in received_json_data:
+            new_train.loss = received_json_data['loss']
+        if 'metrics'in received_json_data:
+            new_train.metrics = received_json_data['metrics']
+        if 'optimizer'in received_json_data:
+            new_train.optimizer = received_json_data['optimizer']
+        if 'power'in received_json_data:
+            new_train.power = received_json_data['power']
+        if 'n_blocks'in received_json_data:
+            new_train.n_blocks = received_json_data['n_blocks']
+        if 'normalization'in received_json_data:
+            new_train.normalization = received_json_data['normalization']
+        if 'learning_rate'in received_json_data:
+            new_train.learning_rate = received_json_data['learning_rate']
+        # for field in field_list:
+        #     print (field.name)
+        #     if field.name in received_json_data:
+        #         print("update field", field.name, received_json_data[field.name] )
+        #         new_train.field = received_json_data[field.name]
+        #         print (new_train)
         new_train.save()
-        
+
         return HttpResponse('OK')
 
     models = list(TrainingModel.objects.all().values())
