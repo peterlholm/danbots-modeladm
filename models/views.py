@@ -9,7 +9,7 @@ def index(request):
     return render(request, 'index.html')
     #return HttpResponse("Hello, world. You're at the polls index.")
 
-#@login_required
+@login_required
 def trainmodel(request):
     if request.method == 'POST':
         print("vi poster")
@@ -34,7 +34,7 @@ def trainmodel(request):
 
     return render(request, 'model.html', mycontext)
 
-#@login_required
+@login_required
 def delete_model(request):
     if request.method == 'GET':
         myid = request.GET.get('id')
@@ -45,7 +45,7 @@ def delete_model(request):
         return HttpResponse("ERROR")
     return redirect('/')
 
-#@login_required
+@login_required
 def list_models(request):
     models = list(TrainingModel.objects.all().values())
     mycontext = {"modellist": models}

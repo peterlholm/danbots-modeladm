@@ -7,6 +7,7 @@ class TrainingModel(models.Model):
     hostname = models.CharField(max_length=40, blank=True, null=True)
     history_path = models.CharField(max_length=200,blank=True, null=True)
     model_path = models.CharField(max_length=200, blank=True, null=True)
+    input_file_path = models.CharField(max_length=200, blank=True, null=True)
     figures_dir = models.CharField(max_length=200, blank=True, null=True)
     dict_text_output_path = models.CharField(max_length=200, blank=True, null=True)
     checkpoint_path = models.CharField(max_length=200, blank=True, null=True)

@@ -1,12 +1,11 @@
 "API functions"
-from datetime import datetime
 import json
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.utils import timezone
+from modeladmin.settings import API_KEY
 from models.models import TrainingModel
-# Create your views here.
 
 # pylint: disable=too-many-branches, too-many-statements
 
@@ -16,8 +15,12 @@ def save_training(request):
     if request.method in ['POST']:
         received_json_data = json.loads(request.body)
         print("received", received_json_data)
+        if 'api-key' not in received_json_data:
+            return HttpResponseForbidden('Error 1')
+        if received_json_data['api-key'] != API_KEY:
+            return HttpResponseForbidden('Error 2')
 
-        field_list = TrainingModel._meta.fields
+        #field_list = TrainingModel._meta.fields
 
         new_train = TrainingModel()
         new_train.date = str(timezone.now())

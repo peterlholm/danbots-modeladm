@@ -1,6 +1,7 @@
 "Training Model client"
 import requests
 
+API_KEY = 'ad666b87-3b17-427f-bd11-24f1fa9b9bb2'
 MODEL_SERVER_URL = "http://traindb.danbots.com/"
 API = "api/save"
 
@@ -11,6 +12,7 @@ if _DEBUG:
 URL = MODEL_SERVER_URL + API
 
 def save_training_result(paramlist):
+    paramlist['api-key'] = API_KEY
     resp = requests.post(URL, json=paramlist )
     if not resp.ok:
         print("API call went wrong", resp.status_code)

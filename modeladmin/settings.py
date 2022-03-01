@@ -127,4 +127,6 @@ STATIC_ROOT = BASE_DIR / 'static'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#LOGIN_URL = 
+LOGIN_URL = "/admin/login/?next=/"
+
+API_KEY = 'ad666b87-3b17-427f-bd11-24f1fa9b9bb2'
