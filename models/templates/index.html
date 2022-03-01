@@ -1,13 +1,22 @@
 {% extends "base3.html" %}
 
 {% block content %}
+<style>
+    .btn-vlg {
+        height: 200px;
+        width: 200px;
+        font-size: 2em;
+        padding: 30px;
+    }
+</style>
+<h2>Training models</h2>
 <br><br><br><br><br><br><br><br><br>
 <div class="row">
     <div class="col-md-3 col-md-offset-1">
-        <a href="{% url 'train' %}" class="btn btn-lg btn-info">New Model</a>
+        <a href="{% url 'train' %}" class="btn btn-lg btn-vlg btn-info">New Model</a>
     </div>
     <div class="col-md-3">
-        <a href="{% url 'list' %}" class="btn btn-lg btn-info">List Models</a>
+        <a href="{% url 'list' %}" class="btn btn-lg btn-vlg btn-info">List Models</a>
     </div>
 </div>
 {% endblock %}

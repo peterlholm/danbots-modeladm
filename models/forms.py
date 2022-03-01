@@ -11,8 +11,8 @@ class TestForm(forms.Form):
 class TrainingModelForm(forms.ModelForm):
     class Meta:
         model = TrainingModel
-        exclude = ['']
-    #     fields = ['description']
+        exclude = ['hostname', 'optimizer']
+        #fields = ['date', 'description', 'model_path','sim_seen_score','sim_unseen_score','wand_score']
 
     def __init__(self, *args, **kwargs):
         #super(TrainingModelForm, self).__init__(*args, **kwargs)
@@ -20,7 +20,7 @@ class TrainingModelForm(forms.ModelForm):
         self.helper = FormHelper()
         #self.helper.wrapper_class = 'row'
         self.helper.form_class = 'form-horizontal'
-        self.helper.label_class = 'col-lg-offset-1 col-lg-2'
+        self.helper.label_class = 'col-lg-offset-2 col-lg-3'
         self.helper.field_class = 'col-lg-7'
         self.helper.add_input(Submit('submit', 'Send'))
         self.helper.add_input(Submit('cancel', 'Fortryd', css_class='btn-secondary', formnovalidate='formnovalidate', formaction='/'))
