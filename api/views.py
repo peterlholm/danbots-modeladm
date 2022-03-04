@@ -46,8 +46,8 @@ def save_training(request):
             new_train.num_training_img = received_json_data['num_training_img']
         if 'num_validation_img'in received_json_data:
             new_train.num_validation_img = received_json_data['num_validation_img']
-        if 'epocs'in received_json_data:
-            new_train.epocs = received_json_data['epocs']
+        if 'epochs'in received_json_data:
+            new_train.epocs = received_json_data['epochs']
         if 'batch_size'in received_json_data:
             new_train.batch_size = received_json_data['batch_size']
         if 'loss'in received_json_data:
@@ -64,6 +64,15 @@ def save_training(request):
             new_train.normalization = received_json_data['normalization']
         if 'learning_rate'in received_json_data:
             new_train.learning_rate = received_json_data['learning_rate']
+        if 'training_data_path'in received_json_data:
+            new_train.training_data_path = received_json_data['training_data_path']
+        if 'sim_seen_score'in received_json_data:
+            new_train.sim_seen_score = received_json_data['sim_seen_score']
+        if 'sim_unseen_score'in received_json_data:
+            new_train.sim_unseen_score = received_json_data['sim_unseen_score']
+        if 'wand_score'in received_json_data:
+            new_train.wand_score = received_json_data['wand_score']
+
         # for field in field_list:
         #     print (field.name)
         #     if field.name in received_json_data:

@@ -1,53 +1,100 @@
 "Views for training"
 from django.shortcuts import redirect, render
+from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from .models import TrainingModel
-from .forms import TrainingModelForm
+from .models import TrainingModel, SimulationModel
+from .forms import TrainingModelForm, SimulationModelForm
 
 def index(request):
     return render(request, 'index.html')
-    #return HttpResponse("Hello, world. You're at the polls index.")
 
 @login_required
-def trainmodel(request):
+def train_model(request):
+    myid = request.GET.get('id')
     if request.method == 'POST':
-        print("vi poster")
-        trainform = TrainingModelForm(request.POST)
-        if trainform.is_valid():
-            print ("alting er godt", trainform)
-            trainform.save()
-            return redirect('list')
-        print ("form is invalid")
-    else:
-        myid = request.GET.get('id')
-        if myid is not None:
-            print("ID:", myid)
+        if myid is None:
+            trainform = TrainingModelForm(request.POST)
+        else:
             train_elem = TrainingModel.objects.get(pk=myid)
-            print (train_elem)
+            trainform = TrainingModelForm(request.POST, instance=train_elem)
+        if trainform.is_valid():
+            trainform.save()
+            return redirect('trainlist')
+        print ("form is invalid")
+    else:   # NOT POST
+        if myid is not None:
+            train_elem = TrainingModel.objects.get(pk=myid)
             trainform = TrainingModelForm(instance=train_elem)
         else:
-            trainform = TrainingModelForm()
+            # new empty form
+            trainform = TrainingModelForm(initial={'date': timezone.now()})
     mycontext = {
         'form': trainform,
+        'head': "Training"
     }
-
     return render(request, 'model.html', mycontext)
 
 @login_required
-def delete_model(request):
+def train_delete(request):
     if request.method == 'GET':
         myid = request.GET.get('id')
         if myid is not None:
             train_elem = TrainingModel.objects.get(pk=myid)
             train_elem.delete()
-            return redirect('list')
+            return redirect('trainlist')
         return HttpResponse("ERROR")
     return redirect('/')
 
 @login_required
-def list_models(request):
+def train_list(request):
     models = list(TrainingModel.objects.all().values().order_by('-date'))
     mycontext = {"modellist": models}
     #print(mycontext)
-    return render(request, 'modellist.html', mycontext)
+    return render(request, 'trainlist.html', mycontext)
+
+# sim
+
+@login_required
+def sim_model(request):
+    myid = request.GET.get('id')
+    if request.method == 'POST':
+        if myid is None:
+            simform = SimulationModelForm(request.POST)
+        else:
+            sim_elem = SimulationModel.objects.get(pk=myid)
+            simform = SimulationModelForm(request.POST, instance=sim_elem)
+        if simform.is_valid():
+            simform.save()
+            return redirect('simlist')
+        print ("form is invalid")
+    else:   # NOT POST
+        if myid is not None:
+            sim_elem = SimulationModel.objects.get(pk=myid)
+            simform = SimulationModelForm(instance=sim_elem)
+        else:
+            # new empty form
+            simform = SimulationModelForm(initial={'date': timezone.now()})
+    mycontext = {
+        'form': simform,
+        'head': "Simulation"
+    }
+    return render(request, 'model.html', mycontext)
+
+@login_required
+def sim_delete(request):
+    if request.method == 'GET':
+        myid = request.GET.get('id')
+        if myid is not None:
+            sim_elem = SimulationModel.objects.get(pk=myid)
+            sim_elem.delete()
+            return redirect('simlist')
+        return HttpResponse("ERROR")
+    return redirect('/')
+
+@login_required
+def sim_list(request):
+    models = list(SimulationModel.objects.all().values().order_by('-date'))
+    mycontext = {"simlist": models}
+    #print(mycontext)
+    return render(request, 'simlist.html', mycontext)

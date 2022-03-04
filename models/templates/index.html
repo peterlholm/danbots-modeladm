@@ -5,18 +5,24 @@
     .btn-vlg {
         height: 200px;
         width: 200px;
-        font-size: 2em;
+        font-size: 1.8em;
         padding: 30px;
     }
 </style>
 <h2>Training models</h2>
 <br><br><br><br><br><br><br><br><br>
 <div class="row">
-    <div class="col-md-3 col-md-offset-1">
-        <a href="{% url 'train' %}" class="btn btn-lg btn-vlg btn-info">New Model</a>
+    <div class="col-md-3">
+        <a href="{% url 'simmodel' %}" class="btn btn-lg btn-vlg btn-info">New<br>Simulation</a>
     </div>
     <div class="col-md-3">
-        <a href="{% url 'list' %}" class="btn btn-lg btn-vlg btn-info">List Models</a>
+        <a href="{% url 'simlist' %}" class="btn btn-lg btn-vlg btn-info">List<br>Simulations</a>
+    </div>
+    <div class="col-md-3">
+        <a href="{% url 'trainmodel' %}" class="btn btn-lg btn-vlg btn-info">New<br>Training</a>
+    </div>
+    <div class="col-md-3">
+        <a href="{% url 'trainlist' %}" class="btn btn-lg btn-vlg btn-info">List<br>Training</a>
     </div>
 </div>
 {% endblock %}

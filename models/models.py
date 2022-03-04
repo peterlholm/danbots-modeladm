@@ -29,3 +29,8 @@ class TrainingModel(models.Model):
     sim_seen_score = models.IntegerField(blank=True, null=True)
     sim_unseen_score = models.IntegerField(blank=True, null=True)
     wand_score = models.IntegerField(blank=True, null=True)
+
+class SimulationModel(models.Model):
+    description = models.CharField(max_length=200, blank=True, null=True )
+    date = models.DateTimeField('date created', blank=True, null=True)
+    data = models.CharField(max_length=40, blank=True, null=True)
