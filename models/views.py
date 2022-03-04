@@ -15,9 +15,9 @@ def trainmodel(request):
         print("vi poster")
         trainform = TrainingModelForm(request.POST)
         if trainform.is_valid():
-            print ("alting er godt")
+            print ("alting er godt", trainform)
             trainform.save()
-            return HttpResponse("Input modtaget")
+            return redirect('list')
         print ("form is invalid")
     else:
         myid = request.GET.get('id')
@@ -47,7 +47,7 @@ def delete_model(request):
 
 @login_required
 def list_models(request):
-    models = list(TrainingModel.objects.all().values())
+    models = list(TrainingModel.objects.all().values().order_by('-date'))
     mycontext = {"modellist": models}
     #print(mycontext)
     return render(request, 'modellist.html', mycontext)
