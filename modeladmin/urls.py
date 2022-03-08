@@ -23,5 +23,6 @@ urlpatterns = [
     #path('accounts/login/', auth_views.LoginView.as_view()),
     path('admin/', admin.site.urls),
     path('models/', include('models.urls')),
-    path('api/', include('api.urls'))
+    path('api/', include('api.urls')),
+    path('runqueue/', include('runqueue.urls'))
 ]
