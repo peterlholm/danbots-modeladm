@@ -1,9 +1,11 @@
 "Views for runqueue"
 import json
+from tkinter import E
 from django.shortcuts import redirect, render
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse, JsonResponse
 from .models import RunQueue
 from .forms import RunQueueForm
 
@@ -76,12 +78,32 @@ def job_get(request):
         return render(request, 'runqueue/joblist.html', mycontext)
 
             #jobform = RunQueueForm
-        return HttpResponse("ERROR")
+        return HttpResponse({'status': 'error', 'reason': 'No host'})
     return redirect('/')
 
 @login_required
 def job_list(request):
-    jobs = list(RunQueue.objects.all().values().order_by('-date'))
+    jobs = list(RunQueue.objects.all().values().order_by('date'))
     mycontext = {"joblist": jobs}
     #print(mycontext)
     return render(request, 'runqueue/joblist.html', mycontext)
+
+@csrf_exempt
+def job_next(request):
+    if request.method == 'GET':
+        host = request.GET.get('host')
+        if host is None:
+            return JsonResponse({'status': 'error', 'reason': 'No host'}, )
+        job_elem = RunQueue.objects.filter(result=None, hostname=host).order_by('date')[:1].first()
+        if job_elem is None:
+            return JsonResponse({'status': '0', 'reason': 'No Jobs'}, )
+        print(job_elem)
+        print(job_elem.command)
+        result = { 'jobid': job_elem.id,
+                  'date': job_elem.date,
+                  'command': job_elem.command,
+                  'status': job_elem.status,
+                  'description': job_elem.description
+                }        
+        return JsonResponse(result)
+    return redirect('/')

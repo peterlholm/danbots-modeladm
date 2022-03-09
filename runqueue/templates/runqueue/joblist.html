@@ -7,7 +7,7 @@
 <br>
 <table class="table table-light table-striped">
     <tr><th>Date</th><th>Description</th><th>Hostname</th><th>Command</th>
-        <th>Result</th><th></th></tr>
+        <th>Result</th><th>Status</th></tr>
     {% for s in joblist %}  
     <tr>
         <td>{{ s.date|date:"SHORT_DATETIME_FORMAT" }}</td>
@@ -15,6 +15,7 @@
         <td>{{ s.hostname }}</td>
         <td>{{ s.command }}</td>
         <td>{{ s.result }}</td>
+        <td>{{ s.status }}</td>
         <td><button type="button" onclick="location.href='job?id={{ s.id }}'" class="btn btn-sm btn-primary">Edit</button> </td>
         <td><button type="button" onclick="location.href='jobdelete?id={{ s.id }}'" class="btn btn-sm btn-danger">Delete</button> </td>
     </tr>

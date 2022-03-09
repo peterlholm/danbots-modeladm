@@ -10,4 +10,5 @@ class RunQueue(models.Model):
     date = models.DateTimeField('date created', blank=True, null=True)
     hostname = models.CharField(max_length=40, choices=HOSTS)
     command = models.CharField(max_length=200,blank=True, null=True)
+    status = models.IntegerField(blank=True, null=True)
     result = models.IntegerField(blank=True, null=True)

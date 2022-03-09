@@ -8,4 +8,5 @@ urlpatterns = [
     path('jobget', views.job_get , name='jobget'),
     path('jobdelete', views.job_delete , name='jobdelete'),
     path('joblist', views.job_list , name='joblist'),
+    path('jobnext', views.job_next , name='jobnext'),
 ]
