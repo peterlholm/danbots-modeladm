@@ -11,12 +11,11 @@ API_KEY = 'ad666b87-3b17-427f-bd11-24f1fa9b9bb2'
 SERVER_URL = "http://traindb.danbots.com/"
 API = "runqueue/"
 HOST='sal5'
-CHECKTIME = 10
+CHECKTIME = 60
 
 _DEBUG = True
 
-if _DEBUG:
-    SERVER_URL = "http://localhost:8000/"
+#SERVER_URL = "http://localhost:8000/"
 URL = SERVER_URL + API
 
 def get_next_job(hostname):
@@ -75,7 +74,7 @@ if __name__ == "__main__":
 
     #res = run_sub('dir')
     if _DEBUG:
-        print("Starting")
+        print("Starting runquejob½")
     running = True
     while running:
         job = get_next_job(HOST)
@@ -93,7 +92,8 @@ if __name__ == "__main__":
             else:
                 send_status(jobid, 3, jobreturn)
         else:
-            print('No Jobs')
+            if _DEBUG:
+                print('No Jobs')
         sleep(CHECKTIME)
 
 

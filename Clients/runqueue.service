@@ -1,0 +1,21 @@
+#
+# runqueue service
+#
+
+[Unit]
+Description=Run Queue Service
+After=network.target
+StartLimitIntervalSec=10
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=10
+User=peter
+Environment=PYTHONUNBUFFERED=1
+StandardOutput=append:/var/log/danbots/runqueue.log
+ExecStart=/usr/local/bin/runqueuejob 
+WorkingDirectory=/tmp/danbots
+
+[Install]
+WantedBy=multi-user.target
