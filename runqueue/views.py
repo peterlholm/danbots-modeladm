@@ -1,6 +1,5 @@
 "Views for runqueue"
 import json
-from tkinter import E
 from django.shortcuts import redirect, render
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
