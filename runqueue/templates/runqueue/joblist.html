@@ -6,11 +6,12 @@
 <h3>Job List</h3>
 <br>
 <table class="table table-light table-striped">
-    <tr><th>Date</th><th>Description</th><th>Hostname</th><th>Command</th>
+    <tr><th>Date</th><th>Id</th><th>Description</th><th>Hostname</th><th>Command</th>
         <th>Result</th><th>Status</th></tr>
     {% for s in joblist %}  
     <tr>
         <td>{{ s.date|date:"SHORT_DATETIME_FORMAT" }}</td>
+        <td>{{ s.id }}</td>
         <td>{{ s.description }}</td>
         <td>{{ s.hostname }}</td>
         <td>{{ s.command }}</td>

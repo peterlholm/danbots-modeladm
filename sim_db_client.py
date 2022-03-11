@@ -11,7 +11,7 @@ if _DEBUG:
     MODEL_SERVER_URL = "http://localhost:8000/"
 URL = MODEL_SERVER_URL + API
 
-def save_training_result(paramlist):
+def save_simulation_result(paramlist):
     paramlist['api-key'] = API_KEY
     resp = requests.post(URL, json=paramlist )
     if not resp.ok:
@@ -27,6 +27,6 @@ def save_training_result(paramlist):
 
 if __name__ == "__main__":
     myparamlist = {"description": "API test", "simulation_path": "/abc/api/path"}
-    result = save_training_result(myparamlist)
+    result = save_simulation_result(myparamlist)
     if not result:
-        print("saving training data went wrong")
+        print("saving simulation data went wrong")
