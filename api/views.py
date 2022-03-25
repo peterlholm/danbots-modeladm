@@ -46,7 +46,7 @@ def save_training(request):
             new_train.num_training_img = received_json_data['num_training_img']
         if 'num_validation_img'in received_json_data:
             new_train.num_validation_img = received_json_data['num_validation_img']
-        if 'epocs'in received_json_data:
+        if 'epochs'in received_json_data:
             new_train.epocs = received_json_data['epochs']
         if 'batch_size'in received_json_data:
             new_train.batch_size = received_json_data['batch_size']
