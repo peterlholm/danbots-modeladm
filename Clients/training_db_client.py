@@ -5,7 +5,7 @@ API_KEY = 'ad666b87-3b17-427f-bd11-24f1fa9b9bb2'
 MODEL_SERVER_URL = "http://traindb.danbots.com/"
 API = "api/save"
 
-_DEBUG = True
+_DEBUG = False
 
 if _DEBUG:
     MODEL_SERVER_URL = "http://localhost:8000/"
@@ -26,7 +26,7 @@ def save_training_result(paramlist):
 # eksempel
 
 if __name__ == "__main__":
-    myparamlist = {"description": "mymodel1", "model2": "mymodel2"}
+    myparamlist = {"description": "mymodel1", "model2": "mymodel2", 'epochs': 33}
     result = save_training_result(myparamlist)
     if not result:
         print("saving training data went wrong")
