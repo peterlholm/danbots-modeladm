@@ -9,6 +9,8 @@
 
 # enshure server environment
 
+mkdir -p /var/www/traindb/site
+
 sudo apt install libapache2-mod-wsgi-py3
 sudo apt-get install python3-venv
 
