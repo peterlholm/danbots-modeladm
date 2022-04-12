@@ -6,8 +6,8 @@
 <h3>Training List</h3>
 <br>
 <table class="table table-light table-striped">
-    <tr><th>Date</th><th>Description</th><th>Modelpath</th><th>Epochs</th><th>sim_seen_score</th>
-        <th>sim_unseen_score</th><th>wand_score</th><th></th><th></th><th></th><th></th></th></tr>
+    <tr><th>Date</th><th>Description</th><th>Modelpath</th><th>Epochs</th><th>sim_seen</th>
+        <th>sim_unseen</th><th>wand</th><th></th><th></th><th></th><th></th></th></tr>
     {% for s in modellist %}  
     <tr>
         <td>{{ s.date|date:"SHORT_DATETIME_FORMAT" }}</td>

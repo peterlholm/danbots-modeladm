@@ -17,4 +17,4 @@ class RunQueueForm(forms.ModelForm):
         self.helper.label_class = 'col-lg-offset-2 col-lg-3'
         self.helper.field_class = 'col-lg-7'
         self.helper.add_input(Submit('submit', 'Save'))
-        self.helper.add_input(Submit('cancel', 'Fortryd', css_class='btn-secondary', formnovalidate='formnovalidate', formaction='/models/trainlist'))
+        self.helper.add_input(Submit('cancel', 'Cancel', css_class='btn-secondary', formnovalidate='formnovalidate', formaction='/models/trainlist'))
