@@ -19,7 +19,7 @@ class TrainingModelForm(forms.ModelForm):
         self.helper.label_class = 'col-lg-offset-2 col-lg-3'
         self.helper.field_class = 'col-lg-7'
         self.helper.add_input(Submit('submit', 'Save'))
-        self.helper.add_input(Submit('cancel', 'Fortryd', css_class='btn-secondary', formnovalidate='formnovalidate', formaction='/models/trainlist'))
+        self.helper.add_input(Submit('cancel', 'Cancel', css_class='btn-secondary', formnovalidate='formnovalidate', formaction='/models/trainlist'))
 
 class SimulationModelForm(forms.ModelForm):
     class Meta:
@@ -36,4 +36,4 @@ class SimulationModelForm(forms.ModelForm):
         self.helper.label_class = 'col-lg-offset-2 col-lg-3'
         self.helper.field_class = 'col-lg-7'
         self.helper.add_input(Submit('submit', 'Save'))
-        self.helper.add_input(Submit('cancel', 'Fortryd', css_class='btn-secondary', formnovalidate='formnovalidate', formaction='/models/simlist'))
+        self.helper.add_input(Submit('cancel', 'Cancel', css_class='btn-secondary', formnovalidate='formnovalidate', formaction='/models/simlist'))
