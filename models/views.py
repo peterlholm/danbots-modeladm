@@ -31,7 +31,8 @@ def train_model(request):
             trainform = TrainingModelForm(initial={'date': timezone.now()})
     mycontext = {
         'form': trainform,
-        'head': "Training"
+        'head': "Training",
+        'id': myid
     }
     return render(request, 'model.html', mycontext)
 

@@ -6,10 +6,11 @@
 <h3>Training List</h3>
 <br>
 <table class="table table-light table-striped">
-    <tr><th>Date</th><th>Description</th><th>Modelpath</th><th>Epochs</th><th>sim_seen</th>
+    <tr><th>Id</th><th>Date</th><th>Description</th><th>Modelpath</th><th>Epochs</th><th>sim_seen</th>
         <th>sim_unseen</th><th>wand</th><th></th><th></th><th></th><th></th></th></tr>
     {% for s in modellist %}  
     <tr>
+        <td>{{ s.id }}</td>
         <td>{{ s.date|date:"SHORT_DATETIME_FORMAT" }}</td>
         <td>{{ s.description }}</td>
         <td>{{ s.model_path }}</td>
