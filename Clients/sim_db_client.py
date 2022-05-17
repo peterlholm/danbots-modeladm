@@ -5,7 +5,7 @@ API_KEY = 'ad666b87-3b17-427f-bd11-24f1fa9b9bb2'
 MODEL_SERVER_URL = "http://traindb.danbots.com/"
 API = "api/savesim"
 
-_DEBUG = False
+_DEBUG = True
 
 if _DEBUG:
     MODEL_SERVER_URL = "http://localhost:8000/"
@@ -30,3 +30,5 @@ if __name__ == "__main__":
     result = save_simulation_result(myparamlist)
     if not result:
         print("saving simulation data went wrong")
+    else:
+        print(result)

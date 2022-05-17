@@ -1,8 +1,10 @@
 "Views for training"
+from pathlib import Path
 from django.shortcuts import redirect, render
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from modeladmin.settings import BASE_DIR
 from .models import TrainingModel, SimulationModel
 from .forms import TrainingModelForm, SimulationModelForm
 
@@ -53,6 +55,20 @@ def train_list(request):
     mycontext = {"modellist": models}
     #print(mycontext)
     return render(request, 'trainlist.html', mycontext)
+
+@login_required
+def train_log(request):
+    myid = request.GET.get('id')
+    print (myid)
+    if not myid:
+        return HttpResponseNotFound('no id')
+    file_path = BASE_DIR / Path('data/trainlog/' + (str(myid) + ".log"))
+    print(file_path)
+    if not file_path.exists():
+        return HttpResponseNotFound('no Log')
+   
+        #fd.write_text(received_json_data['text'], encoding="utf-8")
+    return HttpResponse("<pre>" + open(file_path).read() + "</pre>")
 
 # sim
 

@@ -7,7 +7,7 @@ from .models import TrainingModel, SimulationModel
 class TrainingModelForm(forms.ModelForm):
     class Meta:
         model = TrainingModel
-        exclude = ['hostname', 'optimizer']
+        exclude = ['optimizer']
         #fields = ['date', 'description', 'model_path','sim_seen_score','sim_unseen_score','wand_score']
 
     def __init__(self, *args, **kwargs):

@@ -1,11 +1,12 @@
 "API functions"
 import json
-from django.http import HttpResponse, HttpResponseForbidden
+from pathlib import Path
+from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.utils import timezone
-from modeladmin.settings import API_KEY
 from models.models import TrainingModel, SimulationModel
+from modeladmin.settings import BASE_DIR, API_KEY
 
 # pylint: disable=too-many-branches, too-many-statements
 
@@ -80,12 +81,29 @@ def save_training(request):
         #         new_train.field = received_json_data[field.name]
         #         print (new_train)
         new_train.save()
-
-        return HttpResponse('OK')
+        print ("id", new_train.id)
+        return HttpResponse(str(new_train.id))
 
     models = list(TrainingModel.objects.all().values())
     mycontext = {"modellist": models}
     return render(request, 'modellist.html', mycontext)
+
+@csrf_exempt
+def train_log(request):
+    print("API train log")
+    if request.method in ['POST']:
+        received_json_data = json.loads(request.body)
+        if 'api-key' not in received_json_data:
+            return HttpResponseForbidden('Error 1')
+        if received_json_data['api-key'] != API_KEY:
+            return HttpResponseForbidden('Error 2')
+        if 'jobno' not in received_json_data or 'text' not in received_json_data:
+            return HttpResponseBadRequest("no jobnr or text")
+        file_path = BASE_DIR / 'data' / 'trainlog' / (str(received_json_data['jobno']) + ".log")
+        fd = Path(file_path)
+        fd.open(mode='a', encoding="utf-8")
+        fd.write_text(received_json_data['text'], encoding="utf-8")
+    return HttpResponse("OK")
 
 @csrf_exempt
 def save_sim(request):
@@ -128,8 +146,8 @@ def save_sim(request):
             new_simul.material = received_json_data['material']
 
         new_simul.save()
-
-        return HttpResponse('OK')
+        print ("id", new_simul.id)
+        return HttpResponse(str(new_simul.id))
 
     models = list(SimulationModel.objects.all().values())
     mycontext = {"simlist": models}

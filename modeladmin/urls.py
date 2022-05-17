@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from models.views import index
+from django.conf import settings
+from django.conf.urls.static import static
 #from django.contrib.auth import views as auth_views
+from models.views import index
 
 urlpatterns = [
     path('', index),
@@ -25,4 +27,4 @@ urlpatterns = [
     path('models/', include('models.urls')),
     path('api/', include('api.urls')),
     path('runqueue/', include('runqueue.urls'))
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
