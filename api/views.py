@@ -101,9 +101,10 @@ def train_log(request):
             return HttpResponseBadRequest("no jobnr or text")
         Path(BASE_DIR / 'data' / 'trainlog' ).mkdir(parents=True, exist_ok=True)
         file_path = BASE_DIR / 'data' / 'trainlog' / (str(received_json_data['jobno']) + ".log")
-        fd = Path(file_path)
-        fd.open(mode='a', encoding="utf-8")
-        fd.write_text(received_json_data['text'], encoding="utf-8")
+        #fd = Path(file_path)
+        fd = open(Path(file_path), mode='a', encoding="utf-8")
+        fd.write(received_json_data['text'])
+        fd.close()
     return HttpResponse("OK")
 
 @csrf_exempt

@@ -71,3 +71,9 @@ if __name__ == "__main__":
         print("saving logdata went wrong")
     else:
         print("result: ", result)
+    mytext2 ="*********************************"
+    result = update_training_log(jobno, mytext2)
+    if not result:
+        print("saving logdata went wrong")
+    else:
+        print("result: ", result)
