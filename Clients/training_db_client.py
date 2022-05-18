@@ -37,7 +37,7 @@ def update_training_result(jobno, paramlist):
         #print (resp)
     return int(resp.text)
 
-def update_job_log(jobno, text):
+def update_training_log(jobno, text):
     paramlist = {}
     paramlist['api-key'] = API_KEY
     paramlist['jobno'] = jobno
@@ -45,7 +45,7 @@ def update_job_log(jobno, text):
     resp = requests.post(LogAPI, json=paramlist )
     if not resp.ok:
         print("API call went wrong", resp.status_code)
-        print (resp.text)
+        #print (resp.text)
         return False
     if _DEBUG:
         print(resp.text)
@@ -62,9 +62,11 @@ if __name__ == "__main__":
         print("saving training data went wrong")
     else:
         print("jobnr: ", result)
+        jobno = result
 
     mytext = "Dette er første linie\n og her kommer nr 2\n"
-    result = update_job_log(1, mytext)
+    
+    result = update_training_log(jobno, mytext)
     if not result:
         print("saving logdata went wrong")
     else:

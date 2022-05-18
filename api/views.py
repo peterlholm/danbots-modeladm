@@ -99,6 +99,7 @@ def train_log(request):
             return HttpResponseForbidden('Error 2')
         if 'jobno' not in received_json_data or 'text' not in received_json_data:
             return HttpResponseBadRequest("no jobnr or text")
+        Path(BASE_DIR / 'data' / 'trainlog' ).mkdir(parents=True)
         file_path = BASE_DIR / 'data' / 'trainlog' / (str(received_json_data['jobno']) + ".log")
         fd = Path(file_path)
         fd.open(mode='a', encoding="utf-8")
